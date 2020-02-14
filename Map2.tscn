@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Map.gd" type="Script" id=1]
+[ext_resource path="res://assets/basic-track.png" type="Texture" id=2]
+[ext_resource path="res://objects/Opponent.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/HUD.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.2
+
+[sub_resource type="PhysicsMaterial" id=2]
+bounce = 0.2
+
+[node name="Map" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1362.3, -1458.08 )
+scale = Vector2( 2.91959, 2.60976 )
+texture = ExtResource( 2 )
+
+[node name="Outward" type="StaticBody2D" parent="."]
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Outward"]
+visible = false
+position = Vector2( 127.577, -2626.28 )
+scale = Vector2( 1.1946, 1.35714 )
+build_mode = 1
+polygon = PoolVector2Array( -58.051, 1873.27, -156.954, 1823.14, -234.878, 1722.89, -279.834, 1592.31, -272.342, 1370.7, -252.861, 1195.27, -182.43, 1046.21, -70.0393, 938.051, 87.3069, 881.331, 273.125, 872.098, 487.416, 885.288, 671.736, 939.37, 791.619, 976.304, 1049.37, 1055.45, 1302.62, 1130.63, 1492.93, 1172.84, 1563.37, 1174.16, 1582.85, 1092.38, 1573.85, 919.584, 1570.86, 675.558, 1498.93, 754.701, 1453.97, 824.612, 1347.58, 886.608, 1209.71, 928.818, 1083.83, 961.794, 898.015, 915.627, 794.616, 866.822, 704.704, 770.53, 667.24, 672.92, 631.276, 634.667, 446.956, 712.491, 234.163, 759.978, 58.8348, 744.149, -132.978, 659.729, -279.834, 538.375, -338.277, 360.302, -333.782, 188.824, -281.333, 43.7271, -173.438, -90.8173, 19.8729, -173.918, 262.636, -206.895, 568.337, -204.257, 927.986, -164.685, 1292.13, -147.537, 1573.85, -184.471, 1914.02, -204.257, 2183.76, -151.494, 2348.6, 17.3458, 2408.54, 225.758, 2405.54, 489.57, 2408.54, 840.44, 2404.04, 1328.49, 2366.58, 1623.96, 2245.2, 1780.93, 1963.47, 1922.07, 1723.71, 1932.62, 1325.1, 1947.13, 869.543, 1943.18, 363.038, 1944.5, 40.8524, 1916.79 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Inward" type="StaticBody2D" parent="."]
+physics_material_override = SubResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Inward"]
+position = Vector2( 375.502, -2516.52 )
+build_mode = 1
+polygon = PoolVector2Array( 382.677, 2137.15, 382.677, 2137.15, 158.908, 2131.78, -30.8481, 2121.04, -127.516, 2088.82, -152.578, 1967.09, -154.369, 1696.78, -127.516, 1551.77, -32.6383, 1455.1, 108.784, 1453.31, 352.244, 1517.76, 602.865, 1600.11, 977.007, 1720.05, 1256.27, 1820.3, 1599.98, 1891.9, 1804.06, 1856.1, 2011.71, 1700.36, 2074.37, 1383.5, 2069, 995.036, 2070.79, 597.622, 2034.99, 404.286, 1920.42, 277.185, 1703.81, 218.11, 1551.65, 255.703, 1437.08, 348.791, 1335.04, 483.053, 1220.47, 645.956, 1122.01, 790.959, 1003.86, 799.909, 867.808, 511.695, 738.917, 341.631, 540.21, 275.395, 366.565, 332.68, 160.698, 472.312, -72.0216, 517.066, -217.024, 363.113, -199.122, 164.406, -111.405, 39.0952, 149.957, -23.5601, 429.221, -12.8193, 712.065, 46.2559, 1002.07, 82.0588, 1335.04, 87.4292, 1637.57, 39.0952, 1884.61, 24.7739, 2060.05, -0.288086, 2185.36, 91.0095, 2205.05, 379.224, 2185.36, 671.019, 2183.57, 1000.41, 2190.73, 1490.91, 2172.83, 1854.31, 2104.8, 2067.34, 1956.22, 2121.04, 1707.39, 2117.46, 1277.75, 2133.57, 903.611, 2146.1, 629.718, 2146.1 )
+
+[node name="Purple" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 0, 1, 1 )
+position = Vector2( 929.318, -279.72 )
+collision_mask = 7
+rotate_speed = 6.0
+velocity_t = 0.1
+
+[node name="Camera2D" type="Camera2D" parent="Purple"]
+current = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+
+[node name="Black" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 840.874, -130.24 )
+collision_mask = 7
+rotate_speed = 6.0
+velocity_t = 0.1
+
+[node name="Green" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 741.437, -0.603638 )
+collision_mask = 7
+rotate_speed = 6.0
+velocity_t = 0.1
+
+[node name="RoundStart" type="Area2D" parent="."]
+modulate = Color( 0, 1, 1, 1 )
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoundStart"]
+position = Vector2( 0.000244141, -30.6598 )
+scale = Vector2( 1, 0.806097 )
+polygon = PoolVector2Array( 1019.01, -437.014, 1024.91, 50.5557, 1076.83, 54.9972, 1066.17, -443.165 )
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 4 )]
+
+[connection signal="object_info" from="Purple" to="." method="_on_object_info"]
+[connection signal="object_info" from="Black" to="." method="_on_object_info"]
+[connection signal="object_info" from="Green" to="." method="_on_object_info"]
+[connection signal="body_exited" from="RoundStart" to="." method="_on_RoundStart_body_exited"]
