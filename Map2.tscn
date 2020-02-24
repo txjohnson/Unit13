@@ -1,15 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Map.gd" type="Script" id=1]
 [ext_resource path="res://assets/basic-track.png" type="Texture" id=2]
 [ext_resource path="res://objects/Opponent.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Camera2D.gd" type="Script" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.2
 
 [sub_resource type="PhysicsMaterial" id=2]
 bounce = 0.2
+
+[sub_resource type="Curve2D" id=3]
+bake_interval = 32.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1450.99, -182.591, 0, 0, 0, 0, 2282.6, -199.163, 0, 0, 0, 0, 2438.99, -230.44, 0, 0, 0, 0, 2597.21, -300.354, 0, 0, 0, 0, 2722.32, -436.502, 0, 0, 0, 0, 2777.52, -605.767, 0, 0, 0, 0, 2770.16, -2384.89, 0, 0, 0, 0, 2733.36, -2541.28, 0, 0, 0, 0, 2619.29, -2659.03, 0, 0, 0, 0, 2484.98, -2705.02, 0, 0, 0, 0, 2299.16, -2716.06, 0, 0, 0, 0, 2010.3, -2682.95, 0, 0, 0, 0, 1741.69, -2635.11, 0, 0, 0, 0, 1496.99, -2649.83, 0, 0, 0, 0, 1182.38, -2681.11, 0, 0, 0, 0, 983.673, -2705.02, 0, 0, 0, 0, 591.787, -2736.3, 0, 0, 0, 0, 312.132, -2714.22, 0, 0, 0, 0, 83.9915, -2605.67, 0, 0, 0, 0, -20.8794, -2447.45, 0, 0, 0, 0, -55.8363, -2228.51, 0, 0, 0, 0, -31.9185, -2053.72, 0, 0, 0, 0, 69.2727, -1930.45, 0, 0, 0, 0, 212.78, -1836.62, 0, 0, 0, 0, 367.327, -1799.82, 0, 0, 0, 0, 542.112, -1843.98, 0, 0, 0, 0, 646.982, -1886.3, 0, 0, 0, 0, 775.771, -1926.77, 0, 0, 0, 0, 899.041, -1915.73, 0, 0, 0, 0, 983.673, -1871.58, 0, 0, 0, 0, 1066.47, -1792.46, 0, 0, 0, 0, 1160.3, -1696.79, 0, 0, 0, 0, 1296.45, -1621.36, 0, 0, 0, 0, 1425.23, -1575.36, 0, 0, 0, 0, 1548.5, -1590.08, 0, 0, 0, 0, 1655.21, -1652.64, 0, 0, 0, 0, 1712.25, -1739.11, 0, 0, 0, 0, 1772.96, -1809.02, 0, 0, 0, 0, 1855.76, -1878.94, 0, 0, 0, 0, 1956.95, -1910.21, 0, 0, 0, 0, 2069.18, -1884.46, 0, 0, 0, 0, 2185.09, -1838.46, 0, 0, 0, 0, 2255, -1755.67, 0, 0, 0, 0, 2289.96, -1639.76, 0, 0, 0, 0, 2315.72, -1483.37, 0, 0, 0, 0, 2330.44, -1380.34, 0, 0, 0, 0, 2302.84, -1222.11, 0, 0, 0, 0, 2256.84, -1095.16, 0, 0, 0, 0, 2179.57, -990.294, 0, 0, 0, 0, 2083.9, -946.138, 0, 0, 0, 0, 1931.19, -889.103, 0, 0, 0, 0, 1793.2, -885.423, 0, 0, 0, 0, 1605.54, -922.22, 0, 0, 0, 0, 1430.75, -999.493, 0, 0, 0, 0, 1169.5, -1069.41, 0, 0, 0, 0, 946.876, -1139.32, 0, 0, 0, 0, 639.623, -1238.67, 0, 0, 0, 0, 391.245, -1268.11, 0, 0, 0, 0, 218.3, -1227.63, 0, 0, 0, 0, 124.468, -1165.08, 0, 0, 0, 0, 28.7963, -1045.49, 0, 0, 0, 0, -37.438, -878.064, 0, 0, 0, 0, -53.9965, -723.517, 0, 0, 0, 0, -50.3168, -519.295, 0, 0, 0, 0, -0.641113, -366.588, 0, 0, 0, 0, 104.23, -272.756, 0, 0, 0, 0, 262.456, -208.362, 0, 0, 0, 0, 510.834, -180.764, 0, 0, 0, 0, 965.275, -184.418, 0, 0, 0, 0, 1287.25, -180.78 )
+}
 
 [node name="Map" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,27 +52,16 @@ polygon = PoolVector2Array( 382.677, 2137.15, 382.677, 2137.15, 158.908, 2131.78
 modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 929.318, -279.72 )
 collision_mask = 7
-rotate_speed = 6.0
-velocity_t = 0.1
-
-[node name="Camera2D" type="Camera2D" parent="Purple"]
-current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 
 [node name="Black" parent="." instance=ExtResource( 3 )]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 840.874, -130.24 )
 collision_mask = 7
-rotate_speed = 6.0
-velocity_t = 0.1
 
 [node name="Green" parent="." instance=ExtResource( 3 )]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 741.437, -0.603638 )
 collision_mask = 7
-rotate_speed = 6.0
-velocity_t = 0.1
 
 [node name="RoundStart" type="Area2D" parent="."]
 modulate = Color( 0, 1, 1, 1 )
@@ -78,7 +75,15 @@ polygon = PoolVector2Array( 1019.01, -437.014, 1024.91, 50.5557, 1076.83, 54.997
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 4 )]
 
-[connection signal="object_info" from="Purple" to="." method="_on_object_info"]
-[connection signal="object_info" from="Black" to="." method="_on_object_info"]
-[connection signal="object_info" from="Green" to="." method="_on_object_info"]
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 0, -3.92325 )
+scale = Vector2( 1, 0.998566 )
+curve = SubResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 665.125, -179.813 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+script = ExtResource( 6 )
 [connection signal="body_exited" from="RoundStart" to="." method="_on_RoundStart_body_exited"]

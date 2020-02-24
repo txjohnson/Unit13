@@ -9,37 +9,28 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_position = event.position - get_viewport_rect().size/2
+
+	if event.is_action_pressed ("ui_up"):  
+		press_accelerate ()
+	if event.is_action_released ("ui_up"): 
+		release_accelerate ()
+
+	if event.is_action_pressed ("ui_down"):  
+		press_brakes ()
+	if event.is_action_released ("ui_down"): 
+		release_brakes ()
+
+	if event.is_action_pressed ("ui_left"):  
+		turn_left ()
+	if event.is_action_released ("ui_left"): 
+		release_turn ()
+		
+	if event.is_action_pressed ("ui_right"):  
+		turn_right ()
+	if event.is_action_released ("ui_right"): 
+		release_turn ()
+
 	pass
 
 func process(delta):
-	stop = false
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		var dir = mouse_position.normalized()
-		var deg = dir.angle() - rotation
-		var clockwise = 0
-		if sin(deg) > 0:
-			clockwise = 1
-		if sin(deg) < 0:
-			clockwise = -1
-
-		rotation += clockwise * rotate_speed * delta
-		if velocity.length() <= max_speed: 
-			velocity = velocity.linear_interpolate(Vector2(1,0).rotated(rotation) * max_speed,velocity_t)
-		else:
-			stop = true
-		
-	elif Input.is_key_pressed(KEY_W):
-		var clockwise = 0
-		if Input.is_key_pressed(KEY_D):
-			clockwise = 1
-		if Input.is_key_pressed(KEY_A):
-			clockwise = -1
-			
-		rotation += clockwise * rotate_speed * delta
-		velocity = velocity.linear_interpolate(Vector2(1,0).rotated(rotation) * max_speed,velocity_t)
-
-		
-	else:
-		stop = true
-		
-	pass
+	pass	
