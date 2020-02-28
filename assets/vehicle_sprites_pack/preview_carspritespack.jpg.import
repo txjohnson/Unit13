@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex"
+path="res://.import/preview_carspritespack.jpg-2deae2dde85ea4a18c6ae1e95a24a9d8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/basic-track.png"
-dest_files=[ "res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex" ]
+source_file="res://assets/vehicle_sprites_pack/preview_carspritespack.jpg"
+dest_files=[ "res://.import/preview_carspritespack.jpg-2deae2dde85ea4a18c6ae1e95a24a9d8.stex" ]
 
 [params]
 

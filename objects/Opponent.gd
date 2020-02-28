@@ -37,7 +37,8 @@ var dirs = [
 	]
 	
 var past = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
-var now = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+var now  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+var delt = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 var cops = [Vector2(), Vector2(), Vector2(), Vector2(), Vector2(), Vector2(), Vector2(), Vector2(), Vector2() ]
 var past_ang = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 var now_ang = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
@@ -99,14 +100,13 @@ func process():
 	for i in range(9):
 		var raycast = rays[i]
 		var dir = dirs[i]
+		delt[i] = now [i] - past[i]
 		past[i] = now[i]
 		past_ang [i] = now_ang [i]
 
 		var cp = raycast .get_collision_point ()
 		var bkray = cp .direction_to (global_position)
 		now_ang [i] = raycast.get_collision_normal().angle_to (bkray) * 2
-		
-#		print(i, ": ", rad2deg (bkray.angle()), " vs ", rad2deg(raycast.get_collision_normal ().angle()), " --> ", rad2deg (now_ang[i]))
 		
 		if raycast.is_colliding():
 			cops [i] = to_local (cp)
@@ -116,34 +116,17 @@ func process():
 			cops [i] = dir * detector_max_length
 			
 		raycast.cast_to = dir * detector_max_length
-	
-#	update()
-			
-#		if raycast.is_colliding():
-#			raycast.cast_to = raycast.cast_to.linear_interpolate (dir * detector_min_length,0.1)
-#
-#		else:
-#			raycast.cast_to = raycast.cast_to.linear_interpolate (dir * detector_max_length,0.1)
-#
-#		total_cast_to += raycast.cast_to
-##		now[i] = raycast.cast_to.length()
-#
-#	if velocity != Vector2():
-#		rotating = sin(total_cast_to.normalized().angle())
-
-#	$Info.text = str (velocity.length())
-#	$Info.text = str ((past[R.ahead] - now [R.ahead])*1000)
-#	print ((past[R.right1] - now [R.right2]))
-	
+		
 	# run behaviors
-	prev_acc_action = acc_action
 	prev_turn_action = turn_action
+	prev_acc_action = acc_action
 	
 	coast ()
 	speed ()
 	braking ()
 	turn ()
-#	drift ()
+	hard_turn ()
+	drift ()
 	ahead ()
 #	center ()
 	
@@ -211,57 +194,48 @@ func turn3 ():
 func ahead ():
 	var vote = 0
 	
-	var longest = 0
-	var index = 0
-	for i in range (9):
-		if now[i] > longest: 
-			index = i
-			longest = now[i]
+	var index = longest (now)
 	
-	if now [R.ahead] >= longest:
+	if now [R.ahead] >= now [index]:
 		turn_action = Turn.none
-		is_drifting = false
+
 
 func center ():
 	if now [R.ahead] > 800:
 		if abs (now [R.left] - now [R.right]) > 16:
 			decide_turn (turn0 ())
 
-func drift ():
+
+func hard_turn ():
+	var l = longest (now)
+	if l == R.left: 
+		turn_action = Turn.left
+		
+	if l == R.right:
+		turn_action = Turn.right
+
+
+func drift ():	
+	var l = longest (now)
 	
-	var vote = 0
-	if now [R.right1] - past [R.right1] > 5:
-		vote -= now [R.right1]
-		
-	if now [R.left1] - past [R.left1] > 5:
-		vote += now [R.left1]
-		
-	if vote != 0: decide_turn (vote)
-	
-#	if turn_action == Turn.none:
-#		if   now [R.right1] - past [R.right1] > 1:  
-#			turn_action = Turn.right
-#			is_drifting = true
-#		elif now[R.left1] - past [R.left1] > 1:
-#			turn_action = Turn.left
-#			is_drifting = true
-#
-#	elif turn_action == Turn.left:
-#		if now [R.right1] - past[R.right1] > 1 and now [R.right1] - now [R.right2] > 20: 
-#			turn_action = Turn.right
-#			is_drifting = true
-#
-#	elif turn_action == Turn.right:
-#		if now [R.left1]  - past[R.left1] > 1 and now [R.left1] - now [R.left2] > 20:
-#			turn_action = Turn.left
-#			is_drifting = true
-#
-#	elif is_drifting:
-#		turn_action = prev_turn_action
-		
-	pass
+	if l == R.right1:  turn_action = Turn.right
+
+	if l == R.left1:   turn_action = Turn.left
+
 	
 func braking ():
 	if velocity.length() > 700 and past [R.ahead] - now [R.ahead] > 10:
 		acc_action = Acc.slow_down
 	pass
+
+
+func longest (of) :
+	var l = 0
+	var d = 0.0
+	
+	for i in range(9):
+		if d < of[i]:
+			d = of[i]
+			l = i
+
+	return l

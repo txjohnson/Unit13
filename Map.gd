@@ -1,5 +1,5 @@
-extends Node2D
 
+extends Node2D
 onready var variables_node = $CanvasLayer/NinePatchRect/HBoxContainer/Variables.get_children()
 onready var count = {
 	"Purple":0,
@@ -51,13 +51,13 @@ func _on_object_info(node_name, max_speed, rotate_speed, mass, velocity_t):
 	pass 
 
 func _on_RoundStart_body_exited(body):
-	var cnt = count[body.name]
-	if body.has_method("set_variables"):
-		body.set_variables(change_info["max_speed"][cnt],change_info["rotate_speed"][cnt],change_info["velocity_t"][cnt])
-	if body.name == 'Purple':
-		_on_object_info(body.name, change_info["max_speed"][cnt], change_info["rotate_speed"][cnt], body.get("mass"), change_info["velocity_t"][cnt])
-	if cnt <= 6:
-		count[body.name] += 1
-		
+#	var cnt = count[body.name]
+#	if body.has_method("set_variables"):
+#		body.set_variables(change_info["max_speed"][cnt],change_info["rotate_speed"][cnt],change_info["velocity_t"][cnt])
+#	if body.name == 'Purple':
+#		_on_object_info(body.name, change_info["max_speed"][cnt], change_info["rotate_speed"][cnt], body.get("mass"), change_info["velocity_t"][cnt])
+#	if cnt <= 6:
+#		count[body.name] += 1
+#
 	pass
 

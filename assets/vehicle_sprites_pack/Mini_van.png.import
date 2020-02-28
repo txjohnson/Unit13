@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex"
+path="res://.import/Mini_van.png-01d390e4128f08daaa06c79c5c8b04f2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/basic-track.png"
-dest_files=[ "res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex" ]
+source_file="res://assets/vehicle_sprites_pack/Mini_van.png"
+dest_files=[ "res://.import/Mini_van.png-01d390e4128f08daaa06c79c5c8b04f2.stex" ]
 
 [params]
 

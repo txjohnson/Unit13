@@ -53,7 +53,7 @@ func reset_variables():
 func _ready():
 	#$Fumes.emitting = true
 	reset_variables()
-	$Pivot/body.rotation_degrees = 90
+#	$Pivot/body.rotation_degrees = 90
 
 func set_texture(texture):
 	$Pivot/body.texture = load(texture)
@@ -118,7 +118,7 @@ func _physics_process(delta):
 #	$Camera2D.zoom = Vector2(2,2) + Vector2(zoom_scale, zoom_scale)
 
 
-	
+
 func process_input():
 	# turning
 	angular_friction = ANGULAR_DAMPENING
@@ -165,6 +165,7 @@ func process_input():
 		
 		velocity += facing * ACCELERATION * thrust_limited * min( 1, abs( facing.dot( velocity.normalized() ) ) + 0.5 )
 		skid_size_back = floor( max( 5 - speed / 2 , skid_size_back ) )
+
 
 func turn_right (): 
 	turning_right = true

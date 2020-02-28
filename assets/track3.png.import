@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex"
+path="res://.import/track3.png-9ffff605021b9329c83c667c63d7dd4b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/basic-track.png"
-dest_files=[ "res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex" ]
+source_file="res://assets/track3.png"
+dest_files=[ "res://.import/track3.png-9ffff605021b9329c83c667c63d7dd4b.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex"
+path="res://.import/3.png-b9bdc7d7eaf920c833b5a9525d97e494.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/basic-track.png"
-dest_files=[ "res://.import/basic-track.png-a8838dc078f209d134407ce2f387387c.stex" ]
+source_file="res://assets/vehicle_sprites_pack/Police_animation/3.png"
+dest_files=[ "res://.import/3.png-b9bdc7d7eaf920c833b5a9525d97e494.stex" ]
 
 [params]
 
